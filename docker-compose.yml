@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:14.2
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=airflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+  airflow:
+    build: .
+    command: webserver
+    depends_on:
+      - postgres
+    environment:
+      - AIRFLOW_HOME=/usr/local/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - LOAD_EX=n
+      - FERNET_KEY=${FERNET_KEY}
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:admin@postgres/airflow
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/usr/local/airflow/dags
+      - ./logs:/usr/local/airflow/logs
+      - ./src:/usr/local/airflow/src
+
