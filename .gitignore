@@ -1,0 +1,25 @@
+# ignore all .ipynb_checkpoints
+**/.ipynb_checkpoints
+
+# ignore data and model
+src/data/
+src/models/
+
+# ignore all python cache files
+**/__pycache__
+
+# ignore all .pyc files
+**/*.pyc
+
+# ignore all .pyo files
+**/*.pyo
+
+# ignore all .pyd files
+**/*.pyd
+
+# ignore env files
+.env
+
+# ignore all log files
+logs/
+postgres/
