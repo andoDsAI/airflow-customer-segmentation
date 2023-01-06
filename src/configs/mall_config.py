@@ -9,13 +9,15 @@ class MallConfig(object):
     }
 
     # column name for insert to postgresql
-    COLUMNs_NAME = [
+    COLUMNS_NAME = [
         "customer_id",
         "gender",
         "age",
         "annual_income",
         "spending_score",
     ]
+    
+    COLUMN_MAPPING = {old: new for old, new in zip(PANDAS_SCHEMA.keys(), COLUMNS_NAME)}
 
     # postgresql variable for create table
     POSTGRES_DEFINE = """
@@ -23,7 +25,8 @@ class MallConfig(object):
         gender VARCHAR(50),
         Age INTEGER,
         annual_income INTEGER,
-        spending_score INTEGER
+        spending_score INTEGER,
+        cluster INTEGER
     """
 
 

@@ -15,7 +15,7 @@ class ECommerceConfig(object):
     }
 
     # column name for insert to postgresql
-    COLUMNs_NAME = [
+    COLUMNS_NAME = [
         "customer_id",
         "invoice_no",
         "stock_code",
@@ -25,6 +25,8 @@ class ECommerceConfig(object):
         "unit_price",
         "country",
     ]
+    
+    COLUMN_MAPPING = {old: new for old, new in zip(PANDAS_SCHEMA.keys(), COLUMNS_NAME)}
 
     # postgresql variable for create table
     POSTGRES_DEFINE = """
@@ -35,7 +37,8 @@ class ECommerceConfig(object):
         quantity INTEGER,
         invoice_date TIMESTAMP,
         unit_price FLOAT,
-        country VARCHAR(50)
+        country VARCHAR(50),
+        cluster INTEGER
     """
 
 

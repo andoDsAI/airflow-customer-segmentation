@@ -22,4 +22,5 @@ src/models/
 
 # ignore all log files
 logs/
+plugins/
 postgres/

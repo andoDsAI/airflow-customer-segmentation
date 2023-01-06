@@ -5,4 +5,4 @@ if __name__ == "__main__":
     parser.add_argument("--customer_type", type=str, help="Type of customer", required=True)
 
     args = parser.parse_args()
-    print("Getting segmentation result...")
+    print(f"Getting segmentation result for {args.customer_type} customer...")

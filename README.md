@@ -59,6 +59,7 @@ A step by step series of examples that tell you how to get the project up and ru
 ├── .isort.cfg
 ├── autoscan.sh
 ├── docker-compose.yml                       // docker-compose file
+├── Dockerfile                               // docker file
 ├── pyproject.toml                           
 ├── README.md                                // README.md file
 └── requirements.txt                         // requirements file
@@ -70,3 +71,16 @@ A step by step series of examples that tell you how to get the project up and ru
 chmod +x ./autoscan.sh
 ./autoscan.sh
 ```
+
+## Running project with Docker
+
+1. Install Docker and Docker Compose.
+
+2. Run the following command:
+
+    ```bash
+    docker-compose build
+    docker-compose up -d
+    ```
+
+3. Open <http://localhost:8080/> in your browser.
