@@ -70,6 +70,20 @@ services:
       timeout: 30s
       retries: 50
     restart: always
+  
+  streamlit:
+    build: streamlit
+    command: streamlit run /app/streamlit/app.py
+    ports:
+      - 8501:8501
+    volumes:
+      - ./streamlit:/app/streamlit
+      - ./src:/app/src
+      - .env:/app/.env
+    restart: always
+    depends_on:
+      - postgres
+      - redis
 
   airflow-webserver:
     <<: *airflow-common

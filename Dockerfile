@@ -27,7 +27,4 @@ USER airflow
 
 # Install python dependencies
 COPY requirements.txt .
-RUN python -m pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
-
-# Start streamlit application
-ENTRYPOINT ["streamlit", "run", "/opt/airflow/src/streamlit_app.py"]
+RUN python -m pip install --upgrade pip && pip3 install --no-cache-dir -r requirements.txt
