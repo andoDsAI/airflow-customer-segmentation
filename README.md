@@ -16,7 +16,7 @@ A step by step series of examples that tell you how to get the project up and ru
 2. Install Apache Airflow. You can do this by running the following command:
 
     ```bash
-    pip install apache-airflow
+    pip install apache-airflow==2.3.3
     ```
 
 3. Install any other dependencies required by the project. You can do this by running the following command:
@@ -43,15 +43,14 @@ A step by step series of examples that tell you how to get the project up and ru
         ├── e_commerce.csv                   // e-commerce customer data
         └── mall.csv                         // mall customer data
     ├── models                               // trained model directory
-        ├── __init__.py
-        ├── e_commerce_model.pickle          // e-commerce customer model
-        └── mall_model.pickle                // mall customer model
+    ├── notebooks                            // jupyter notebook directory
     ├── utils
         ├── __init__.py                      
         ├── db.py                            // database functions
         └── helpers.py                       // helper functions
     ├── crawler.py                           // crawler
     ├── segmentation.py                      // get segmentation result and insert to elasticsearch
+    ├── streamlit_app.py                     // streamlit app
     └── training.py                          // training segmentation model
 ├── .env                                     // environment variables
 ├── .flake8
@@ -83,4 +82,5 @@ chmod +x ./autoscan.sh
     docker-compose up -d
     ```
 
-3. Open <http://localhost:8080/> in your browser.
+3. Open <http://localhost:8080/> in your browser to see airflow webserver.
+4. Open <http://localhost:8501/> in your browser to see streamlit app.

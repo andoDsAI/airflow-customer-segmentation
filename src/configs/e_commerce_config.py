@@ -1,21 +1,17 @@
-import datetime
-
-
 class ECommerceConfig(object):
     TABLE_NAME = "e_commerce_customer"
-    PANDAS_SCHEMA = {
-        "CustomerID": int,
-        "InvoiceNo": int,
-        "StockCode": str,
-        "Description": str,
-        "Quantity": int,
-        "InvoiceDate": datetime.datetime,
-        "UnitPrice": float,
-        "Country": str,
-    }
-
-    # column name for insert to postgresql
     COLUMNS_NAME = [
+        "CustomerID",
+        "InvoiceNo",
+        "StockCode",
+        "Description",
+        "Quantity",
+        "InvoiceDate",
+        "UnitPrice",
+        "Country",
+    ]
+
+    NEW_COLUMNS_NAME = [
         "customer_id",
         "invoice_no",
         "stock_code",
@@ -25,21 +21,41 @@ class ECommerceConfig(object):
         "unit_price",
         "country",
     ]
-    
-    COLUMN_MAPPING = {old: new for old, new in zip(PANDAS_SCHEMA.keys(), COLUMNS_NAME)}
+
+    COLUMN_MAPPING = {old: new for old, new in zip(COLUMNS_NAME, NEW_COLUMNS_NAME)}
+
+    PANDAS_SCHEMA = {
+        "customer_id": int,
+        "amount": float,
+        "country": str,
+    }
+
+    # column name for clustering
+    TRAINING_COLUMNS = ["amount", "country"]
+    CATEGORICAL_COLUMNS = ["country"]
 
     # postgresql variable for create table
     POSTGRES_DEFINE = """
         customer_id INTEGER PRIMARY KEY,
-        invoice_no INTEGER,
-        stock_code VARCHAR(50),
-        description VARCHAR(50),
-        quantity INTEGER,
-        invoice_date TIMESTAMP,
-        unit_price FLOAT,
+        amount FLOAT,
         country VARCHAR(50),
         cluster INTEGER
     """
+
+    MODEL_CONFIG = {
+        "k_means": {
+            "n_clusters": 5,
+            "random_state": 42,
+        },
+        "gaussian_mixture": {
+            "n_components": 5,
+            "random_state": 42,
+        },
+        "dbscan": {
+            "eps": 0.5,
+            "min_samples": 5,
+        },
+    }
 
 
 e_commerce_config = ECommerceConfig()

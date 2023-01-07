@@ -1,23 +1,28 @@
 class MallConfig(object):
     TABLE_NAME = "mall_customer"
+    COLUMNS_NAME = [
+        "CustomerID",
+        "Gender",
+        "Age",
+        "Annual Income (k$)",
+        "Spending Score (1-100)",
+    ]
+
+    NEW_COLUMNS_NAME = ["customer_id", "gender", "age", "annual_income", "spending_score"]
+
+    COLUMN_MAPPING = {old: new for old, new in zip(COLUMNS_NAME, NEW_COLUMNS_NAME)}
+
     PANDAS_SCHEMA = {
-        "CustomerID": int,
-        "Gender": str,
-        "Age": int,
-        "Annual Income (k$)": int,
-        "Spending Score (1-100)": int,
+        "customer_id": int,
+        "gender": str,
+        "age": int,
+        "annual_income": int,
+        "spending_score": int,
     }
 
-    # column name for insert to postgresql
-    COLUMNS_NAME = [
-        "customer_id",
-        "gender",
-        "age",
-        "annual_income",
-        "spending_score",
-    ]
-    
-    COLUMN_MAPPING = {old: new for old, new in zip(PANDAS_SCHEMA.keys(), COLUMNS_NAME)}
+    # column name for clustering
+    TRAINING_COLUMNS = ["age", "gender", "annual_income", "spending_score"]
+    CATEGORICAL_COLUMNS = ["gender"]
 
     # postgresql variable for create table
     POSTGRES_DEFINE = """
@@ -28,6 +33,21 @@ class MallConfig(object):
         spending_score INTEGER,
         cluster INTEGER
     """
+
+    MODEL_CONFIG = {
+        "k_means": {
+            "n_clusters": 5,
+            "random_state": 42,
+        },
+        "gaussian_mixture": {
+            "n_components": 5,
+            "random_state": 42,
+        },
+        "dbscan": {
+            "eps": 0.5,
+            "min_samples": 5,
+        },
+    }
 
 
 mall_config = MallConfig()

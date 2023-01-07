@@ -2,15 +2,19 @@ FROM apache/airflow:2.3.3
 
 USER root
 
-# Install python dependencies
-COPY requirements.txt .
-RUN python3 -m pip install --upgrade pip && pip3 install -r requirements.txt
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+         vim \
+  && apt-get autoremove -yqq --purge \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 # Copy DAGs and other files
 COPY ./dags /opt/airflow/dags
 COPY ./logs /opt/airflow/logs
 COPY ./plugins /opt/airflow/plugins
 COPY ./src /opt/airflow/src
+COPY .env /opt/airflow/.env
 
 ENV AIRFLOW_HOME=/opt/airflow
 
@@ -20,3 +24,10 @@ RUN adduser airflow sudo
 RUN chown -R airflow ${AIRFLOW_HOME}
 
 USER airflow
+
+# Install python dependencies
+COPY requirements.txt .
+RUN python -m pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+
+# Start streamlit application
+ENTRYPOINT ["streamlit", "run", "/opt/airflow/src/streamlit_app.py"]

@@ -13,7 +13,7 @@ class Config(object):
     POSTGRES_USER = os.getenv("POSTGRES_USER")
     POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
     POSTGRES_AIRFLOW_DB = os.getenv("POSTGRES_DB")
-
+    POSTGRES_DB = os.getenv("POSTGRES_DB")
     POSTGRES_APP_DB = os.getenv("POSTGRES_APP_DB")
 
 

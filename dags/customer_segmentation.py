@@ -13,7 +13,7 @@ DAG_OWNER_NAME = "andoDsAI"
 START_DATE = days_ago(1)
 SCHEDULE_INTERVAL = "0 0 * * *"
 ALERT_EMAIL = ["andoDsAI@gmail.com"]
-NUM_RETRIES = 1
+NUM_RETRIES = 0
 RETRY_DELAY = datetime.timedelta(minutes=5)
 
 default_args = {

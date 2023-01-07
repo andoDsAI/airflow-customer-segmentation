@@ -1,5 +1,6 @@
 import gc
 import os
+import pickle
 import traceback
 
 import pandas as pd
@@ -111,7 +112,30 @@ def insert_data_to_db(table_name: str, data=None, conn=None):
         raise e
     cur.close()
     conn.close()
-    
+
+
+def save_pkl(data, file_path: str):
+    """Save model to disk
+
+    Args:
+        model (object): Model to save
+    """
+    with open(file_path, "wb") as f:
+        pickle.dump(data, f)
+        f.close()
+
+
+def load_pkl(file_path: str = ""):
+    """Load model from disk
+
+    Args:
+        model_path (str): Model
+    """
+    with open(file_path, "rb") as f:
+        model = pickle.load(f)
+        f.close()
+    return model
+
 
 def clean_garbage():
     print("Cleaning garbage")
