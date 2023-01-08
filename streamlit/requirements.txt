@@ -5,7 +5,7 @@ psycopg2-binary==2.9.4
 tqdm==4.62.3
 scikit-learn==1.0.2
 plotly==5.11.0
-streamlit==1.10.0
+streamlit==1.11.1
 watchdog==2.1.6
 pandas-profiling==3.1.0
 streamlit-pandas-profiling
