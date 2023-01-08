@@ -21,17 +21,16 @@ class MallConfig(object):
     }
 
     # column name for clustering
-    TRAINING_COLUMNS = ["age", "gender", "annual_income", "spending_score"]
-    CATEGORICAL_COLUMNS = ["gender"]
+    TRAINING_COLUMNS = ["annual_income", "spending_score"]
+    CATEGORICAL_COLUMNS = []
 
     # postgresql variable for create table
     POSTGRES_DEFINE = """
         customer_id INTEGER PRIMARY KEY,
         gender VARCHAR(50),
-        Age INTEGER,
+        age INTEGER,
         annual_income INTEGER,
-        spending_score INTEGER,
-        cluster INTEGER
+        spending_score INTEGER
     """
 
     MODEL_CONFIG = {
@@ -43,11 +42,10 @@ class MallConfig(object):
             "n_components": 5,
             "random_state": 42,
         },
-        "dbscan": {
-            "eps": 0.5,
-            "min_samples": 5,
-        },
     }
+    # add column for each algorithm
+    for algorithm in MODEL_CONFIG:
+        POSTGRES_DEFINE += f", {algorithm}_cluster INTEGER"
 
 
 mall_config = MallConfig()
