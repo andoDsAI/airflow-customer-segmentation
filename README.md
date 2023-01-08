@@ -50,8 +50,12 @@ A step by step series of examples that tell you how to get the project up and ru
         └── helpers.py                       // helper functions
     ├── crawler.py                           // crawler
     ├── segmentation.py                      // get segmentation result and insert to elasticsearch
-    ├── streamlit_app.py                     // streamlit app
     └── training.py                          // training segmentation model
+├── streamlit                                // streamlit application
+    ├── __init__.py
+    ├── app.py                               // streamlit application
+    ├── Dockerfile                           // docker file
+    └── requirements.txt                     // requirements file
 ├── .env                                     // environment variables
 ├── .flake8
 ├── .gitignore
@@ -74,13 +78,26 @@ chmod +x ./autoscan.sh
 ## Running project with Docker
 
 1. Install Docker and Docker Compose.
+2. Create logs and plugins directory in airflow home directory.
 
-2. Run the following command:
+    ```bash
+    mkdir -p ./logs
+    mkdir -p ./plugins
+    ```
+
+3. Create models and data folder in src directory.
+
+    ```bash
+    mkdir -p ./src/models
+    mkdir -p ./src/data
+    ```
+
+4. Run the following command:
 
     ```bash
     docker-compose build
     docker-compose up -d
     ```
 
-3. Open <http://localhost:8080/> in your browser to see airflow webserver.
-4. Open <http://localhost:8501/> in your browser to see streamlit app.
+5. Open <http://localhost:8080/> in your browser to see airflow webserver.
+6. Open <http://localhost:8501/> in your browser to see streamlit app.
