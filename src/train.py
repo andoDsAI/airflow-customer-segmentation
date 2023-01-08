@@ -57,11 +57,12 @@ if __name__ == "__main__":
 
     exec(f"from configs import {args.customer_type.lower()}_config")
     config = eval(f"{args.customer_type.lower()}_config")
-
+    
+    # dictionary of clustering algorithms
     clustering_algorithms = {
         "k_means": KMeans,
         "gaussian_mixture": GaussianMixture,
-        "dbscan": DBSCAN,
+        "db_scan": DBSCAN,
     }
 
     # get data from postgresql
@@ -69,13 +70,13 @@ if __name__ == "__main__":
     # pre-process the data
     data = pre_processing(df_customer, args)
 
-    # train the model
     # get current path of this file
     current_path = os.path.dirname(os.path.abspath(__file__))
     if not os.path.exists(os.path.join(current_path, "models")):
         os.mkdir(os.path.join(current_path, "models"))
 
-    for algorithm in tqdm(clustering_algorithms, desc="Training model: "):
+    # train the model
+    for algorithm in tqdm(config.MODEL_CONFIG.keys(), desc="Training model: "):
         print(f"Training model for {algorithm}...")
         model = clustering_algorithms[algorithm](**config.MODEL_CONFIG[algorithm])
         model.fit(data)

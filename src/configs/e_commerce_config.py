@@ -39,7 +39,8 @@ class ECommerceConfig(object):
         customer_id INTEGER PRIMARY KEY,
         amount FLOAT,
         country VARCHAR(50),
-        cluster INTEGER
+        k_means_cluster INTEGER,
+        gaussian_mixture_cluster INTEGER
     """
 
     MODEL_CONFIG = {
@@ -50,10 +51,6 @@ class ECommerceConfig(object):
         "gaussian_mixture": {
             "n_components": 5,
             "random_state": 42,
-        },
-        "dbscan": {
-            "eps": 0.5,
-            "min_samples": 5,
         },
     }
 

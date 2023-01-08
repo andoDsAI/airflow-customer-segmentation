@@ -50,8 +50,12 @@ A step by step series of examples that tell you how to get the project up and ru
         └── helpers.py                       // helper functions
     ├── crawler.py                           // crawler
     ├── segmentation.py                      // get segmentation result and insert to elasticsearch
-    ├── streamlit_app.py                     // streamlit app
     └── training.py                          // training segmentation model
+├── streamlit                                // streamlit application
+    ├── __init__.py
+    ├── app.py                               // streamlit application
+    ├── Dockerfile                           // docker file
+    └── requirements.txt                     // requirements file
 ├── .env                                     // environment variables
 ├── .flake8
 ├── .gitignore
